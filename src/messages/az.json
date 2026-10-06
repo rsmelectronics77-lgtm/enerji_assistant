@@ -1,0 +1,26 @@
+{
+  "brand": "Enerji Köməkçisi",
+  "auth": {
+    "login": "Daxil ol",
+    "register": "Qeydiyyatdan keç",
+    "logout": "Çıxış",
+    "email": "E-poçt",
+    "password": "Şifrə",
+    "fullName": "Ad və soyad",
+    "newPassword": "Yeni şifrə",
+    "forgot": "Şifrəni unutmusunuz?",
+    "sendReset": "Bərpa linki göndər",
+    "savePassword": "Şifrəni yenilə",
+    "noAccount": "Hesabınız yoxdur?",
+    "haveAccount": "Artıq hesabınız var?",
+    "checkEmail": "E-poçtunuzu yoxlayın və təsdiq linkinə keçid edin.",
+    "resetSent": "Əgər bu e-poçt qeydiyyatlıdırsa, bərpa linki göndərildi.",
+    "invalid": "E-poçt və ya şifrə yanlışdır.",
+    "generic": "Xəta baş verdi. Bir az sonra yenidən cəhd edin."
+  },
+  "validation": {
+    "email": "Düzgün e-poçt daxil edin.",
+    "passwordMin": "Şifrə ən azı 8 simvol olmalıdır.",
+    "nameMin": "Ad ən azı 2 simvol olmalıdır."
+  }
+}
