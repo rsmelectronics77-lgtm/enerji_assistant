@@ -1,4 +1,7 @@
+import Link from "next/link";
+import { buttonClass } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { t } from "@/lib/i18n";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function DashboardPage() {
@@ -7,11 +10,14 @@ export default async function DashboardPage() {
 
   return (
     <Card>
-      <h1 className="text-2xl font-semibold">Xoş gəldiniz{profile?.full_name ? `, ${profile.full_name}` : ""}</h1>
-      <p className="mt-2 text-muted">
-        Hesab və verilənlər bazası işləyir. Dashboard göstəriciləri hesablama mühərriki (Stage 4) və
-        analitika (Stage 5) hazır olduqdan sonra əlavə olunacaq. Hələ implement edilməyib.
-      </p>
+      <h1 className="text-2xl font-semibold">
+        {t("dashboard.welcome")}
+        {profile?.full_name ? `, ${profile.full_name}` : ""}
+      </h1>
+      <p className="mt-2 text-muted">{t("dashboard.intro")}</p>
+      <Link href="/properties" className={buttonClass("primary", "mt-5")}>
+        {t("dashboard.cta")}
+      </Link>
     </Card>
   );
 }
