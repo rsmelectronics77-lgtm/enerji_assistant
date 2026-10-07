@@ -244,3 +244,43 @@ export function calculateSummary(devices: DeviceInput[], tariff: Tariff): Energy
     devices: deviceResults,
   };
 }
+
+// ───────── Tarif pilləsindəki mövqe ─────────
+
+export interface TariffPosition {
+  /** Növbəti 1 kWh-ın qiyməti (istifadəçinin hazırda olduğu pillənin qiyməti). */
+  currentPricePerKwh: number;
+  /** Növbəti pillənin qiyməti. Ən yüksək pillədədirsə null. */
+  nextPricePerKwh: number | null;
+  /** Növbəti pilləyə qədər qalan aylıq kWh. Ən yüksək pillədədirsə null. */
+  kwhToNextTier: number | null;
+}
+
+/**
+ * Aylıq istehlakın tarif pillələrində harada olduğunu göstərir.
+ * Pillənin sərhədində (məs. dəqiq 200 kWh) növbəti kWh artıq yuxarı pillənin qiymətinə düşür.
+ */
+export function tariffPosition(monthlyKwh: number, tariff: Tariff): TariffPosition {
+  assertFiniteNumber(monthlyKwh, "Aylıq kWh");
+  if (monthlyKwh < 0) {
+    throw new EnergyInputError("Aylıq kWh mənfi ola bilməz.");
+  }
+  const tiers = validateTariff(tariff);
+
+  for (let i = 0; i < tiers.length; i++) {
+    const tier = tiers[i];
+    if (!tier) continue;
+    if (tier.toKwh === null || monthlyKwh < tier.toKwh) {
+      const next = tiers[i + 1];
+      return {
+        currentPricePerKwh: tier.pricePerKwh,
+        nextPricePerKwh: next ? next.pricePerKwh : null,
+        kwhToNextTier: tier.toKwh === null ? null : roundKwh(tier.toKwh - monthlyKwh),
+      };
+    }
+  }
+
+  // Çatmamalıdır (son pillə limitsizdir), tipləri təmin etmək üçündür.
+  const last = tiers[tiers.length - 1];
+  return { currentPricePerKwh: last ? last.pricePerKwh : 0, nextPricePerKwh: null, kwhToNextTier: null };
+}

@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EntityForm, type FormField } from "@/components/forms/entity-form";
+import { TierMeter } from "@/components/charts/tier-meter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { calculateSummary, type DeviceInput } from "@/features/energy/calculations";
+import { calculateSummary, tariffPosition, type DeviceInput } from "@/features/energy/calculations";
 import { loadTariff } from "@/features/energy/load-tariff";
 import {
   createDeviceAction,
@@ -83,6 +84,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
     isActive: d.is_active,
   }));
   const summary = calculateSummary(inputs, tariff);
+  const position = tariffPosition(summary.monthly.kwh, tariff);
   const money = (v: number) =>
     new Intl.NumberFormat("az-AZ", { style: "currency", currency: summary.currency }).format(v);
   const kwh = (v: number) => `${nf.format(v)} kWh`;
@@ -158,6 +160,11 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
               <dd>{money(summary.monthly.totalCost)}</dd>
             </div>
           </dl>
+
+          <h3 className="mt-6 text-sm font-semibold">{t("dashboard.tierMeter")}</h3>
+          <div className="mt-3">
+            <TierMeter tiers={tariff.tiers} monthlyKwh={summary.monthly.kwh} position={position} />
+          </div>
 
           <h3 className="mt-6 text-sm font-semibold">{t("results.topDevices")}</h3>
           <ul className="mt-3 space-y-3">

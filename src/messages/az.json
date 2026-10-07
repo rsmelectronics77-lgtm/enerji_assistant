@@ -43,7 +43,25 @@
   "dashboard": {
     "welcome": "Xoş gəldiniz",
     "intro": "Obyektlərinizi, otaqlarınızı və elektrik cihazlarınızı əlavə edin, aylıq və illik enerji xərcini görün.",
-    "cta": "Obyektlərə keç"
+    "cta": "Obyektlərə keç",
+    "monthlyCost": "Aylıq xərc",
+    "monthlyKwh": "Aylıq istehlak",
+    "yearlyCost": "İllik xərc",
+    "deviceCount": "Cihaz sayı",
+    "costByProperty": "Obyektlər üzrə aylıq xərc",
+    "topDevices": "Ən çox enerji işlədən cihazlar",
+    "byCategory": "Kateqoriyalar üzrə istehlak",
+    "otherCategories": "Qalan kateqoriyalar",
+    "noCategory": "Kateqoriyasız",
+    "propertiesTitle": "Obyektlərim",
+    "noDevices": "Hələ cihaz yoxdur. Obyektə keçib cihaz əlavə edin.",
+    "emptyCharts": "Qrafiklər ilk cihazı əlavə etdikdən sonra görünəcək.",
+    "tierMeter": "Tarif pilləsi",
+    "tierNow": "Cari qiymət",
+    "tierNext": "Növbəti pilləyə",
+    "tierThen": "sonra",
+    "tierLast": "Ən yüksək pillədəsiniz.",
+    "estimateNote": "Bütün rəqəmlər daxil etdiyiniz güc və saatlara əsaslanan təxmini hesabdır. Hər obyekt ayrıca sayğac kimi hesablanır."
   },
   "property": {
     "title": "Obyektlər",
